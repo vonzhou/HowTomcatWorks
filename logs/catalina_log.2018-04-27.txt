@@ -1,0 +1,13 @@
+2018-04-27 23:05:25 HttpConnector Opening server socket on all host IP addresses
+2018-04-27 23:05:25 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+

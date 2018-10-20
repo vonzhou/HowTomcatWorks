@@ -1,0 +1,12 @@
+2018-04-26 11:50:39 HttpConnector Opening server socket on all host IP addresses
+2018-04-26 11:50:39 HttpConnector httpConnector, io problem: 
+java.net.BindException: Address already in use (Bind failed):8080
+	at org.apache.catalina.connector.http.HttpConnector.open(HttpConnector.java:910)
+	at org.apache.catalina.connector.http.HttpConnector.initialize(HttpConnector.java:1115)
+	at org.apache.catalina.core.StandardService.initialize(StandardService.java:578)
+	at org.apache.catalina.core.StandardServer.initialize(StandardServer.java:2242)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:504)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+

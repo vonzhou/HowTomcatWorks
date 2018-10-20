@@ -1,0 +1,117 @@
+2018-04-25 09:15:13 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 09:15:13 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
+2018-04-25 09:56:07 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 09:57:07 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
+2018-04-25 09:57:14 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 09:58:34 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
+2018-04-25 10:01:03 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 10:03:48 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
+2018-04-25 10:03:53 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 10:06:05 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
+2018-04-25 10:06:08 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 10:06:20 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
+2018-04-25 10:08:10 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 10:08:10 HttpConnector[8080] Starting background thread
+2018-04-25 10:08:10 HttpProcessor[8080][0] Starting background thread
+2018-04-25 10:08:10 HttpProcessor[8080][1] Starting background thread
+2018-04-25 10:08:10 HttpProcessor[8080][2] Starting background thread
+2018-04-25 10:08:10 HttpProcessor[8080][3] Starting background thread
+2018-04-25 10:08:10 HttpProcessor[8080][4] Starting background thread
+2018-04-25 10:08:10 HttpProcessor[8080][4] Stopping background thread
+2018-04-25 10:08:10 HttpProcessor[8080][3] Stopping background thread
+2018-04-25 10:08:10 HttpProcessor[8080][2] Stopping background thread
+2018-04-25 10:08:10 HttpProcessor[8080][1] Stopping background thread
+2018-04-25 10:08:10 HttpProcessor[8080][0] Stopping background thread
+2018-04-25 10:08:10 HttpConnector[8080] Stopping background thread
+2018-04-25 18:53:54 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 18:53:54 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
+2018-04-25 18:54:04 HttpConnector Opening server socket on all host IP addresses
+2018-04-25 18:54:04 UserDatabaseRealm[Standalone]: Exception looking up UserDatabase under key UserDatabase
+java.lang.ClassCastException: org.apache.naming.ResourceRef cannot be cast to org.apache.catalina.UserDatabase
+	at org.apache.catalina.realm.UserDatabaseRealm.start(UserDatabaseRealm.java:291)
+	at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1170)
+	at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:341)
+	at org.apache.catalina.core.StandardService.start(StandardService.java:496)
+	at org.apache.catalina.core.StandardServer.start(StandardServer.java:2186)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:505)
+	at org.apache.catalina.startup.Catalina.execute(Catalina.java:395)
+	at org.apache.catalina.startup.Catalina.process(Catalina.java:175)
+	at org.apache.catalina.startup.Catalina.main(Catalina.java:160)
+
