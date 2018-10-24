@@ -10,66 +10,68 @@ import java.io.File;
 
 public class HttpServer {
 
-  /** WEB_ROOT is the directory where our HTML and other files reside.
-   *  For this package, WEB_ROOT is the "webroot" directory under the working
-   *  directory.
-   *  The working directory is the location in the file system
-   *  from where the java command was invoked.
-   */
-  public static final String WEB_ROOT =
-    System.getProperty("user.dir") + File.separator  + "webroot";
+    /**
+     * WEB_ROOT is the directory where our HTML and other files reside.
+     * For this package, WEB_ROOT is the "webroot" directory under the working
+     * directory.
+     * The working directory is the location in the file system
+     * from where the java command was invoked.
+     */
+    public static final String WEB_ROOT =
+            System.getProperty("user.dir") + File.separator + "webroot";
 
-  // shutdown command
-  private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
+    // shutdown command
+    private static final String SHUTDOWN_COMMAND = "/SHUTDOWN";
 
-  // the shutdown command received
-  private boolean shutdown = false;
+    // the shutdown command received
+    private boolean shutdown = false;
 
-  public static void main(String[] args) {
-    HttpServer server = new HttpServer();
-    server.await();
-  }
-
-  public void await() {
-    ServerSocket serverSocket = null;
-    int port = 8080;
-    try {
-      serverSocket =  new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-      System.exit(1);
+    public static void main(String[] args) {
+        HttpServer server = new HttpServer();
+        server.await();
     }
 
-    // Loop waiting for a request
-    while (!shutdown) {
-      Socket socket = null;
-      InputStream input = null;
-      OutputStream output = null;
-      try {
-        socket = serverSocket.accept();
-        input = socket.getInputStream();
-        output = socket.getOutputStream();
+    public void await() {
+        ServerSocket serverSocket = null;
+        int port = 8080;
+        try {
+            serverSocket = new ServerSocket(port, 1, InetAddress.getByName("127.0.0.1"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
-        // create Request object and parse
-        Request request = new Request(input);
-        request.parse();
+        // Loop waiting for a request
+        while (!shutdown) {
+            Socket socket = null;
+            InputStream input = null;
+            OutputStream output = null;
+            try {
+                // 等待请求到来
+                socket = serverSocket.accept();
+                input = socket.getInputStream();
+                output = socket.getOutputStream();
 
-        // create Response object
-        Response response = new Response(output);
-        response.setRequest(request);
-        response.sendStaticResource();
+                // create Request object and parse
+                Request request = new Request(input);
+                request.parse();
 
-        // Close the socket
-        socket.close();
+                // create Response object
+                Response response = new Response(output);
+                response.setRequest(request);
+                response.sendStaticResource();
 
-        //check if the previous URI is a shutdown command
-        shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
-      }
-      catch (Exception e) {
-        e.printStackTrace();
-        continue;
-      }
+                // Close the socket
+                socket.close();
+
+                //check if the previous URI is a shutdown command
+                System.out.println(request.getUri());
+                shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
+        System.out.println("Server shutdown===================");
     }
-  }
 }

@@ -32,12 +32,12 @@
 		<dependency>
 			<groupId>tomcat</groupId>
 			<artifactId>tomcat-util</artifactId>
-			<version>3.3.2</version>
+			<version>5.5.23</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-daemon</groupId>
 			<artifactId>commons-daemon</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.13</version>
 		</dependency>
 		<dependency>
 			<groupId>regexp</groupId>
