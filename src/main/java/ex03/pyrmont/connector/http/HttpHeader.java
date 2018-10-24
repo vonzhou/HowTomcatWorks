@@ -95,7 +95,7 @@ final class HttpHeader {
     public boolean equals(char[] buf, int end) {
         if (end != nameEnd)
             return false;
-        for (int i=0; i<end; i++) {
+        for (int i = 0; i < end; i++) {
             if (buf[i] != name[i])
                 return false;
         }
@@ -126,7 +126,7 @@ final class HttpHeader {
     public boolean valueEquals(char[] buf, int end) {
         if (end != valueEnd)
             return false;
-        for (int i=0; i<end; i++) {
+        for (int i = 0; i < end; i++) {
             if (buf[i] != value[i])
                 return false;
         }
@@ -165,7 +165,7 @@ final class HttpHeader {
             for (int i = 0; i < end; i++) {
                 if (value[i + pos] != buf[i])
                     break;
-                if (i == (end-1))
+                if (i == (end - 1))
                     return true;
             }
             pos++;
@@ -186,7 +186,7 @@ final class HttpHeader {
      * Returns the index of a character in the value.
      */
     public int valueIndexOf(char c, int start) {
-        for (int i=start; i<valueEnd; i++) {
+        for (int i = start; i < valueEnd; i++) {
             if (value[i] == c)
                 return i;
         }
@@ -209,7 +209,7 @@ final class HttpHeader {
      */
     public boolean headerEquals(HttpHeader header) {
         return (equals(header.name, header.nameEnd))
-            && (valueEquals(header.value, header.valueEnd));
+                && (valueEquals(header.value, header.valueEnd));
     }
 
 
@@ -227,7 +227,7 @@ final class HttpHeader {
             char val[] = name;
             int len = nameEnd;
             for (int i = 0; i < len; i++)
-                h = 31*h + val[off++];
+                h = 31 * h + val[off++];
             hashCode = h;
         }
         return h;

@@ -18,6 +18,12 @@ output.write("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n".getBytes());
 
 门面模式
 
+## 3. 连接器
+
+使用tomcat-util RequestUtil解析请求参数和cookie
+
+实现的Connector是Tomcat 4默认连接器的一个简化版本
+
 
 ## TODO
 
