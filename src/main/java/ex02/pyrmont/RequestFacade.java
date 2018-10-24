@@ -10,134 +10,137 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 
+/**
+ * 门面模式？
+ */
 public class RequestFacade implements ServletRequest {
 
-  private ServletRequest request = null;
+    private ServletRequest request = null;
 
-  public RequestFacade(Request request) {
-    this.request = request;
-  }
+    public RequestFacade(Request request) {
+        this.request = request;
+    }
 
-  /* implementation of the ServletRequest*/
-  public Object getAttribute(String attribute) {
-    return request.getAttribute(attribute);
-  }
+    /* implementation of the ServletRequest*/
+    public Object getAttribute(String attribute) {
+        return request.getAttribute(attribute);
+    }
 
-  public Enumeration getAttributeNames() {
-    return request.getAttributeNames();
-  }
+    public Enumeration getAttributeNames() {
+        return request.getAttributeNames();
+    }
 
-  public String getRealPath(String path) {
-    return request.getRealPath(path);
-  }
+    public String getRealPath(String path) {
+        return request.getRealPath(path);
+    }
 
-  @Override
-  public int getRemotePort() {
-    return 0;
-  }
+    @Override
+    public int getRemotePort() {
+        return 0;
+    }
 
-  @Override
-  public String getLocalName() {
-    return null;
-  }
+    @Override
+    public String getLocalName() {
+        return null;
+    }
 
-  @Override
-  public String getLocalAddr() {
-    return null;
-  }
+    @Override
+    public String getLocalAddr() {
+        return null;
+    }
 
-  @Override
-  public int getLocalPort() {
-    return 0;
-  }
+    @Override
+    public int getLocalPort() {
+        return 0;
+    }
 
-  public RequestDispatcher getRequestDispatcher(String path) {
-    return request.getRequestDispatcher(path);
-  }
+    public RequestDispatcher getRequestDispatcher(String path) {
+        return request.getRequestDispatcher(path);
+    }
 
-  public boolean isSecure() {
-    return request.isSecure();
-  }
+    public boolean isSecure() {
+        return request.isSecure();
+    }
 
-  public String getCharacterEncoding() {
-    return request.getCharacterEncoding();
-  }
+    public String getCharacterEncoding() {
+        return request.getCharacterEncoding();
+    }
 
-  public int getContentLength() {
-    return request.getContentLength();
-  }
+    public int getContentLength() {
+        return request.getContentLength();
+    }
 
-  public String getContentType() {
-    return request.getContentType();
-  }
+    public String getContentType() {
+        return request.getContentType();
+    }
 
-  public ServletInputStream getInputStream() throws IOException {
-    return request.getInputStream();
-  }
+    public ServletInputStream getInputStream() throws IOException {
+        return request.getInputStream();
+    }
 
-  public Locale getLocale() {
-    return request.getLocale();
-  }
+    public Locale getLocale() {
+        return request.getLocale();
+    }
 
-  public Enumeration getLocales() {
-    return request.getLocales();
-  }
+    public Enumeration getLocales() {
+        return request.getLocales();
+    }
 
-  public String getParameter(String name) {
-    return request.getParameter(name);
-  }
+    public String getParameter(String name) {
+        return request.getParameter(name);
+    }
 
-  public Map getParameterMap() {
-    return request.getParameterMap();
-  }
+    public Map getParameterMap() {
+        return request.getParameterMap();
+    }
 
-  public Enumeration getParameterNames() {
-    return request.getParameterNames();
-  }
+    public Enumeration getParameterNames() {
+        return request.getParameterNames();
+    }
 
-  public String[] getParameterValues(String parameter) {
-    return request.getParameterValues(parameter);
-  }
+    public String[] getParameterValues(String parameter) {
+        return request.getParameterValues(parameter);
+    }
 
-  public String getProtocol() {
-    return request.getProtocol();
-  }
+    public String getProtocol() {
+        return request.getProtocol();
+    }
 
-  public BufferedReader getReader() throws IOException {
-    return request.getReader();
-  }
+    public BufferedReader getReader() throws IOException {
+        return request.getReader();
+    }
 
-  public String getRemoteAddr() {
-    return request.getRemoteAddr();
-  }
+    public String getRemoteAddr() {
+        return request.getRemoteAddr();
+    }
 
-  public String getRemoteHost() {
-    return request.getRemoteHost();
-  }
+    public String getRemoteHost() {
+        return request.getRemoteHost();
+    }
 
-  public String getScheme() {
-   return request.getScheme();
-  }
+    public String getScheme() {
+        return request.getScheme();
+    }
 
-  public String getServerName() {
-    return request.getServerName();
-  }
+    public String getServerName() {
+        return request.getServerName();
+    }
 
-  public int getServerPort() {
-    return request.getServerPort();
-  }
+    public int getServerPort() {
+        return request.getServerPort();
+    }
 
-  public void removeAttribute(String attribute) {
-    request.removeAttribute(attribute);
-  }
+    public void removeAttribute(String attribute) {
+        request.removeAttribute(attribute);
+    }
 
-  public void setAttribute(String key, Object value) {
-    request.setAttribute(key, value);
-  }
+    public void setAttribute(String key, Object value) {
+        request.setAttribute(key, value);
+    }
 
-  public void setCharacterEncoding(String encoding)
-    throws UnsupportedEncodingException {
-    request.setCharacterEncoding(encoding);
-  }
+    public void setCharacterEncoding(String encoding)
+            throws UnsupportedEncodingException {
+        request.setCharacterEncoding(encoding);
+    }
 
 }
