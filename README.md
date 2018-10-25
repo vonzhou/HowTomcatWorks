@@ -25,7 +25,19 @@ output.write("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n".getBytes());
 实现的Connector是Tomcat 4默认连接器的一个简化版本
 
 
+## 4.Tomcat的默认连接器
+
+HTTP 1.1 的新特性
+
+Tomcat 4默认连接器的原理
+
 ## TODO
+
+TODO 找一个版本的tomcat,浏览源码
+
+
+
+
 
 ---
 
