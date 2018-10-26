@@ -70,6 +70,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+
 import org.apache.catalina.Lifecycle;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleListener;
@@ -86,9 +87,7 @@ import org.apache.catalina.util.StringManager;
  * @version $Revision: 1.8 $ $Date: 2002/06/09 02:19:43 $
  */
 
-public class FileLogger
-    extends LoggerBase
-    implements Lifecycle {
+public class FileLogger extends LoggerBase implements Lifecycle {
 
 
     // ----------------------------------------------------- Instance Variables
@@ -111,7 +110,7 @@ public class FileLogger
      * The descriptive information about this implementation.
      */
     protected static final String info =
-        "org.apache.catalina.logger.FileLogger/1.0";
+            "org.apache.catalina.logger.FileLogger/1.0";
 
 
     /**
@@ -130,7 +129,7 @@ public class FileLogger
      * The string manager for this package.
      */
     private StringManager sm =
-        StringManager.getManager(Constants.Package);
+            StringManager.getManager(Constants.Package);
 
 
     /**
@@ -248,11 +247,9 @@ public class FileLogger
      * @param timestamp The new timestamp flag
      */
     public void setTimestamp(boolean timestamp) {
-
         boolean oldTimestamp = this.timestamp;
         this.timestamp = timestamp;
-        support.firePropertyChange("timestamp", new Boolean(oldTimestamp),
-                                   new Boolean(this.timestamp));
+        support.firePropertyChange("timestamp", new Boolean(oldTimestamp), new Boolean(this.timestamp));
 
     }
 
@@ -266,15 +263,15 @@ public class FileLogger
      * servlet container.
      *
      * @param msg A <code>String</code> specifying the message to be written
-     *  to the log file
+     *            to the log file
      */
     public void log(String msg) {
-
         // Construct the timestamp we will use, if requested
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         String tsString = ts.toString().substring(0, 19);
         String tsDate = tsString.substring(0, 10);
 
+        // 打开新的日志文件
         // If the date has changed, switch log files
         if (!date.equals(tsDate)) {
             synchronized (this) {
@@ -286,6 +283,7 @@ public class FileLogger
             }
         }
 
+        // 是否在日志前面加上时间戳
         // Log this message, timestamped if necessary
         if (writer != null) {
             if (timestamp) {
@@ -305,14 +303,12 @@ public class FileLogger
      * Close the currently open log file (if any)
      */
     private void close() {
-
         if (writer == null)
             return;
         writer.flush();
         writer.close();
         writer = null;
         date = "";
-
     }
 
 
@@ -329,8 +325,7 @@ public class FileLogger
 
         // Open the current log file
         try {
-            String pathname = dir.getAbsolutePath() + File.separator +
-                prefix + date + suffix;
+            String pathname = dir.getAbsolutePath() + File.separator + prefix + date + suffix;
             writer = new PrintWriter(new FileWriter(pathname, true), true);
         } catch (IOException e) {
             writer = null;
@@ -348,9 +343,7 @@ public class FileLogger
      * @param listener The listener to add
      */
     public void addLifecycleListener(LifecycleListener listener) {
-
         lifecycle.addLifecycleListener(listener);
-
     }
 
 
@@ -359,9 +352,7 @@ public class FileLogger
      * Lifecycle has no listeners registered, a zero-length array is returned.
      */
     public LifecycleListener[] findLifecycleListeners() {
-
         return lifecycle.findLifecycleListeners();
-
     }
 
 
@@ -371,9 +362,7 @@ public class FileLogger
      * @param listener The listener to add
      */
     public void removeLifecycleListener(LifecycleListener listener) {
-
         lifecycle.removeLifecycleListener(listener);
-
     }
 
 
@@ -382,15 +371,15 @@ public class FileLogger
      * component.  This method should be called after <code>configure()</code>,
      * and before any of the public methods of the component are utilized.
      *
-     * @exception org.apache.catalina.LifecycleException if this component detects a fatal error
-     *  that prevents this component from being used
+     * @throws org.apache.catalina.LifecycleException if this component detects a fatal error
+     *                                                that prevents this component from being used
      */
     public void start() throws LifecycleException {
 
         // Validate and update our current component state
         if (started)
             throw new LifecycleException
-                (sm.getString("fileLogger.alreadyStarted"));
+                    (sm.getString("fileLogger.alreadyStarted"));
         lifecycle.fireLifecycleEvent(START_EVENT, null);
         started = true;
 
@@ -402,15 +391,15 @@ public class FileLogger
      * component.  This method should be the last one called on a given
      * instance of this component.
      *
-     * @exception org.apache.catalina.LifecycleException if this component detects a fatal error
-     *  that needs to be reported
+     * @throws org.apache.catalina.LifecycleException if this component detects a fatal error
+     *                                                that needs to be reported
      */
     public void stop() throws LifecycleException {
 
         // Validate and update our current component state
         if (!started)
             throw new LifecycleException
-                (sm.getString("fileLogger.notStarted"));
+                    (sm.getString("fileLogger.notStarted"));
         lifecycle.fireLifecycleEvent(STOP_EVENT, null);
         started = false;
 

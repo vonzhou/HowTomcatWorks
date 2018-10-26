@@ -70,6 +70,7 @@ import java.beans.PropertyChangeListener;
 import java.io.CharArrayWriter;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+
 import org.apache.catalina.Container;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Logger;
@@ -84,8 +85,7 @@ import org.apache.catalina.Logger;
  * @version $Revision: 1.5 $ $Date: 2002/01/25 20:12:20 $
  */
 
-public abstract class LoggerBase
-    implements Logger {
+public abstract class LoggerBase implements Logger {
 
 
     // ----------------------------------------------------- Instance Variables
@@ -102,12 +102,11 @@ public abstract class LoggerBase
      */
     protected int debug = 0;
 
-    
+
     /**
      * The descriptive information about this implementation.
      */
-    protected static final String info =
-        "org.apache.catalina.logger.LoggerBase/1.0";
+    protected static final String info = "org.apache.catalina.logger.LoggerBase/1.0";
 
 
     /**
@@ -250,7 +249,7 @@ public abstract class LoggerBase
      * servlet container.  This message will be logged unconditionally.
      *
      * @param message A <code>String</code> specifying the message to be
-     *  written to the log file
+     *                written to the log file
      */
     public abstract void log(String msg);
 
@@ -264,7 +263,7 @@ public abstract class LoggerBase
      * unconditionally.
      *
      * @param exception An <code>Exception</code> to be reported
-     * @param msg The associated message string
+     * @param msg       The associated message string
      */
     public void log(Exception exception, String msg) {
 
@@ -279,8 +278,8 @@ public abstract class LoggerBase
      * and type of the servlet log file is specific to the servlet container,
      * usually an event log.  This message will be logged unconditionally.
      *
-     * @param msg A <code>String</code> that describes the error or
-     *  exception
+     * @param msg       A <code>String</code> that describes the error or
+     *                  exception
      * @param throwable The <code>Throwable</code> error or exception
      */
     public void log(String msg, Throwable throwable) {
@@ -308,15 +307,13 @@ public abstract class LoggerBase
      * log, if the logger is set to a verbosity level equal to or higher than
      * the specified value for this message.
      *
-     * @param message A <code>String</code> specifying the message to be
-     *  written to the log file
+     * @param message   A <code>String</code> specifying the message to be
+     *                  written to the log file
      * @param verbosity Verbosity level of this message
      */
     public void log(String message, int verbosity) {
-
         if (this.verbosity >= verbosity)
             log(message);
-
     }
 
 
@@ -325,8 +322,8 @@ public abstract class LoggerBase
      * usually an event log, if the logger is set to a verbosity level equal
      * to or higher than the specified value for this message.
      *
-     * @param message A <code>String</code> that describes the error or
-     *  exception
+     * @param message   A <code>String</code> that describes the error or
+     *                  exception
      * @param throwable The <code>Throwable</code> error or exception
      * @param verbosity Verbosity level of this message
      */
