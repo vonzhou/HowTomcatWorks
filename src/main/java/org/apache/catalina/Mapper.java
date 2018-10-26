@@ -67,7 +67,7 @@ package org.apache.catalina;
 
 /**
  * Interface defining methods that a parent Container may implement to select
- * a subordinate Container to process a particular Request, optionally
+ * a subordinate(附属的) Container to process a particular Request, optionally
  * modifying the properties of the Request to reflect the selections made.
  * <p>
  * A typical Container may be associated with a single Mapper that processes
@@ -94,9 +94,8 @@ public interface Mapper {
      * Set the Container with which this Mapper is associated.
      *
      * @param container The newly associated Container
-     *
-     * @exception IllegalArgumentException if this Container is not
-     *  acceptable to this Mapper
+     * @throws IllegalArgumentException if this Container is not
+     *                                  acceptable to this Mapper
      */
     public void setContainer(Container container);
 
@@ -124,7 +123,7 @@ public interface Mapper {
      * identified, return <code>null</code> instead.
      *
      * @param request Request being processed
-     * @param update Update the Request to reflect the mapping selection?
+     * @param update  Update the Request to reflect the mapping selection?
      */
     public Container map(Request request, boolean update);
 

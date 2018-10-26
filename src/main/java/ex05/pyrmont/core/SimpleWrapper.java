@@ -23,315 +23,309 @@ import org.apache.catalina.Valve;
 import org.apache.catalina.Wrapper;
 
 
-
 public class SimpleWrapper implements Wrapper, Pipeline {
 
-  // the servlet instance
-  private Servlet instance = null;
-  private String servletClass;
-  private Loader loader;
-  private String name;
-  private SimplePipeline pipeline = new SimplePipeline(this);
-  protected Container parent = null;
+    // the servlet instance
+    private Servlet instance = null;
+    private String servletClass;
+    private Loader loader;
+    private String name;
+    private SimplePipeline pipeline = new SimplePipeline(this);
+    protected Container parent = null;
 
-  public SimpleWrapper() {
-    pipeline.setBasic(new SimpleWrapperValve());
-  }
+    public SimpleWrapper() {
+        pipeline.setBasic(new SimpleWrapperValve());
+    }
 
-  public synchronized void addValve(Valve valve) {
-    pipeline.addValve(valve);
-  }
+    public synchronized void addValve(Valve valve) {
+        pipeline.addValve(valve);
+    }
 
-  public Servlet allocate() throws ServletException {
-    // Load and initialize our instance if necessary
-    if (instance==null) {
-      try {
+    public Servlet allocate() throws ServletException {
+        // Load and initialize our instance if necessary
+        if (instance == null) {
+            try {
+                instance = loadServlet();
+            } catch (ServletException e) {
+                throw e;
+            } catch (Throwable e) {
+                throw new ServletException("Cannot allocate a servlet instance", e);
+            }
+        }
+        return instance;
+    }
+
+    private Servlet loadServlet() throws ServletException {
+        if (instance != null)
+            return instance;
+
+        Servlet servlet = null;
+        String actualClass = servletClass;
+        if (actualClass == null) {
+            throw new ServletException("servlet class has not been specified");
+        }
+
+        Loader loader = getLoader();
+        // Acquire an instance of the class loader to be used
+        if (loader == null) {
+            throw new ServletException("No loader.");
+        }
+        ClassLoader classLoader = loader.getClassLoader();
+
+        // Load the specified servlet class from the appropriate class loader
+        Class classClass = null;
+        try {
+            if (classLoader != null) {
+                classClass = classLoader.loadClass(actualClass);
+            }
+        } catch (ClassNotFoundException e) {
+            throw new ServletException("Servlet class not found");
+        }
+        // Instantiate and initialize an instance of the servlet class itself
+        try {
+            servlet = (Servlet) classClass.newInstance();
+        } catch (Throwable e) {
+            throw new ServletException("Failed to instantiate servlet");
+        }
+
+        // Call the initialization method of this servlet
+        try {
+            servlet.init(null);
+        } catch (Throwable f) {
+            throw new ServletException("Failed initialize servlet.");
+        }
+        return servlet;
+    }
+
+    public String getInfo() {
+        return null;
+    }
+
+    public Loader getLoader() {
+        if (loader != null)
+            return (loader);
+        if (parent != null)
+            return (parent.getLoader());
+        return (null);
+    }
+
+    public void setLoader(Loader loader) {
+        this.loader = loader;
+    }
+
+    public Logger getLogger() {
+        return null;
+    }
+
+    public void setLogger(Logger logger) {
+    }
+
+    public Manager getManager() {
+        return null;
+    }
+
+    public void setManager(Manager manager) {
+    }
+
+    public Cluster getCluster() {
+        return null;
+    }
+
+    public void setCluster(Cluster cluster) {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Container getParent() {
+        return parent;
+    }
+
+    public void setParent(Container container) {
+        parent = container;
+    }
+
+    public ClassLoader getParentClassLoader() {
+        return null;
+    }
+
+    public void setParentClassLoader(ClassLoader parent) {
+    }
+
+    public Realm getRealm() {
+        return null;
+    }
+
+    public void setRealm(Realm realm) {
+    }
+
+    public DirContext getResources() {
+        return null;
+    }
+
+    public void setResources(DirContext resources) {
+    }
+
+    public long getAvailable() {
+        return 0;
+    }
+
+    public void setAvailable(long available) {
+    }
+
+    public String getJspFile() {
+        return null;
+    }
+
+    public void setJspFile(String jspFile) {
+    }
+
+    public int getLoadOnStartup() {
+        return 0;
+    }
+
+    public void setLoadOnStartup(int value) {
+    }
+
+    public String getRunAs() {
+        return null;
+    }
+
+    public void setRunAs(String runAs) {
+    }
+
+    public String getServletClass() {
+        return null;
+    }
+
+    public void setServletClass(String servletClass) {
+        this.servletClass = servletClass;
+    }
+
+    public void addChild(Container child) {
+    }
+
+    public void addContainerListener(ContainerListener listener) {
+    }
+
+    public void addMapper(Mapper mapper) {
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    }
+
+    public Container findChild(String name) {
+        return null;
+    }
+
+    public Container[] findChildren() {
+        return null;
+    }
+
+    public ContainerListener[] findContainerListeners() {
+        return null;
+    }
+
+    public void addInitParameter(String name, String value) {
+    }
+
+    public void addInstanceListener(InstanceListener listener) {
+    }
+
+    public void addSecurityReference(String name, String link) {
+    }
+
+    public void deallocate(Servlet servlet) throws ServletException {
+    }
+
+    public String findInitParameter(String name) {
+        return null;
+    }
+
+    public String[] findInitParameters() {
+        return null;
+    }
+
+    public String findSecurityReference(String name) {
+        return null;
+    }
+
+    public String[] findSecurityReferences() {
+        return null;
+    }
+
+    public Mapper findMapper(String protocol) {
+        return null;
+    }
+
+    public Mapper[] findMappers() {
+        return null;
+    }
+
+    public void invoke(Request request, Response response)
+            throws IOException, ServletException {
+        pipeline.invoke(request, response);
+    }
+
+    public boolean isUnavailable() {
+        return false;
+    }
+
+    public void load() throws ServletException {
         instance = loadServlet();
-      }
-      catch (ServletException e) {
-        throw e;
-      }
-      catch (Throwable e) {
-        throw new ServletException("Cannot allocate a servlet instance", e);
-      }
-    }
-    return instance;
-  }
-
-  private Servlet loadServlet() throws ServletException {
-    if (instance!=null)
-      return instance;
-
-    Servlet servlet = null;
-    String actualClass = servletClass;
-    if (actualClass == null) {
-      throw new ServletException("servlet class has not been specified");
     }
 
-    Loader loader = getLoader();
-    // Acquire an instance of the class loader to be used
-    if (loader==null) {
-      throw new ServletException("No loader.");
-    }
-    ClassLoader classLoader = loader.getClassLoader();
-
-    // Load the specified servlet class from the appropriate class loader
-    Class classClass = null;
-    try {
-      if (classLoader!=null) {
-        classClass = classLoader.loadClass(actualClass);
-      }
-    }
-    catch (ClassNotFoundException e) {
-      throw new ServletException("Servlet class not found");
-    }
-    // Instantiate and initialize an instance of the servlet class itself
-    try {
-      servlet = (Servlet) classClass.newInstance();
-    }
-    catch (Throwable e) {
-      throw new ServletException("Failed to instantiate servlet");
+    public Container map(Request request, boolean update) {
+        return null;
     }
 
-    // Call the initialization method of this servlet
-    try {
-      servlet.init(null);
+    public void removeChild(Container child) {
     }
-    catch (Throwable f) {
-      throw new ServletException("Failed initialize servlet.");
+
+    public void removeContainerListener(ContainerListener listener) {
     }
-    return servlet;
-  }
 
-  public String getInfo() {
-    return null;
-  }
+    public void removeMapper(Mapper mapper) {
+    }
 
-  public Loader getLoader() {
-    if (loader != null)
-      return (loader);
-    if (parent != null)
-      return (parent.getLoader());
-    return (null);
-  }
+    public void removeInitParameter(String name) {
+    }
 
-  public void setLoader(Loader loader) {
-    this.loader = loader;
-  }
+    public void removeInstanceListener(InstanceListener listener) {
+    }
 
-  public Logger getLogger() {
-    return null;
-  }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    }
 
-  public void setLogger(Logger logger) {
-  }
+    public void removeSecurityReference(String name) {
+    }
 
-  public Manager getManager() {
-    return null;
-  }
+    public void unavailable(UnavailableException unavailable) {
+    }
 
-  public void setManager(Manager manager) {
-  }
+    public void unload() throws ServletException {
+    }
 
-  public Cluster getCluster() {
-    return null;
-  }
+    // method implementations of Pipeline
+    public Valve getBasic() {
+        return pipeline.getBasic();
+    }
 
-  public void setCluster(Cluster cluster) {
-  }
+    public void setBasic(Valve valve) {
+        pipeline.setBasic(valve);
+    }
 
-  public String getName() {
-    return name;
-  }
+    public Valve[] getValves() {
+        return pipeline.getValves();
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Container getParent() {
-    return parent;
-  }
-
-  public void setParent(Container container) {
-    parent = container;
-  }
-
-  public ClassLoader getParentClassLoader() {
-    return null;
-  }
-
-  public void setParentClassLoader(ClassLoader parent) {
-  }
-
-  public Realm getRealm() {
-    return null;
-  }
-
-  public void setRealm(Realm realm) {
-  }
-
-  public DirContext getResources() {
-    return null;
-  }
-
-  public void setResources(DirContext resources) {
-  }
-
-  public long getAvailable() {
-    return 0;
-  }
-
-  public void setAvailable(long available) {
-  }
-
-  public String getJspFile() {
-    return null;
-  }
-
-  public void setJspFile(String jspFile) {
-  }
-
-  public int getLoadOnStartup() {
-   return 0;
-  }
-
-  public void setLoadOnStartup(int value) {
-  }
-
-  public String getRunAs() {
-    return null;
-  }
-
-  public void setRunAs(String runAs) {
-  }
-
-  public String getServletClass() {
-    return null;
-  }
-
-  public void setServletClass(String servletClass) {
-    this.servletClass = servletClass;
-  }
-
-  public void addChild(Container child) {
-  }
-
-  public void addContainerListener(ContainerListener listener) {
-  }
-
-  public void addMapper(Mapper mapper) {
-  }
-
-  public void addPropertyChangeListener(PropertyChangeListener listener) {
-  }
-
-  public Container findChild(String name) {
-    return null;
-  }
-
-  public Container[] findChildren() {
-    return null;
-  }
-
-  public ContainerListener[] findContainerListeners() {
-    return null;
-  }
-
-  public void addInitParameter(String name, String value) {
-  }
-
-  public void addInstanceListener(InstanceListener listener) {
-  }
-
-  public void addSecurityReference(String name, String link) {
-  }
-
-  public void deallocate(Servlet servlet) throws ServletException {
-  }
-
-  public String findInitParameter(String name) {
-    return null;
-  }
-
-  public String[] findInitParameters() {
-    return null;
-  }
-
-  public String findSecurityReference(String name) {
-    return null;
-  }
-
-  public String[] findSecurityReferences() {
-    return null;
-  }
-
-  public Mapper findMapper(String protocol) {
-    return null;
-  }
-
-  public Mapper[] findMappers() {
-    return null;
-  }
-
-  public void invoke(Request request, Response response)
-    throws IOException, ServletException {
-    pipeline.invoke(request, response);
-  }
-
-  public boolean isUnavailable() {
-    return false;
-  }
-
-  public void load() throws ServletException {
-    instance = loadServlet();
-  }
-
-  public Container map(Request request, boolean update) {
-    return null;
-  }
-
-  public void removeChild(Container child) {
-  }
-
-  public void removeContainerListener(ContainerListener listener) {
-  }
-
-  public void removeMapper(Mapper mapper) {
-  }
-
-  public void removeInitParameter(String name) {
-  }
-
-  public void removeInstanceListener(InstanceListener listener) {
-  }
-
-  public void removePropertyChangeListener(PropertyChangeListener listener) {
-  }
-
-  public void removeSecurityReference(String name) {
-  }
-
-  public void unavailable(UnavailableException unavailable) {
-  }
-
-  public void unload() throws ServletException {
-  }
-
-  // method implementations of Pipeline
-  public Valve getBasic() {
-    return pipeline.getBasic();
-  }
-
-  public void setBasic(Valve valve) {
-    pipeline.setBasic(valve);
-  }
-
-  public Valve[] getValves() {
-    return pipeline.getValves();
-  }
-
-  public void removeValve(Valve valve) {
-    pipeline.removeValve(valve);
-  }
+    public void removeValve(Valve valve) {
+        pipeline.removeValve(valve);
+    }
 
 }

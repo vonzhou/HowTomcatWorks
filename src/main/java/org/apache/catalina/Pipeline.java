@@ -131,13 +131,12 @@ public interface Pipeline {
      * if it is already associated with a different Container.</p>
      *
      * @param valve Valve to be added
-     *
-     * @exception IllegalArgumentException if this Container refused to
-     *  accept the specified Valve
-     * @exception IllegalArgumentException if the specifie Valve refuses to be
-     *  associated with this Container
-     * @exception IllegalStateException if the specified Valve is already
-     *  associated with a different Container
+     * @throws IllegalArgumentException if this Container refused to
+     *                                  accept the specified Valve
+     * @throws IllegalArgumentException if the specifie Valve refuses to be
+     *                                  associated with this Container
+     * @throws IllegalStateException    if the specified Valve is already
+     *                                  associated with a different Container
      */
     public void addValve(Valve valve);
 
@@ -158,14 +157,13 @@ public interface Pipeline {
      * processed through the same Pipeline without interfering with each
      * other's control flow.
      *
-     * @param request The servlet request we are processing
+     * @param request  The servlet request we are processing
      * @param response The servlet response we are creating
-     *
-     * @exception java.io.IOException if an input/output error occurs
-     * @exception javax.servlet.ServletException if a servlet exception is thrown
+     * @throws java.io.IOException            if an input/output error occurs
+     * @throws javax.servlet.ServletException if a servlet exception is thrown
      */
     public void invoke(Request request, Response response)
-        throws IOException, ServletException;
+            throws IOException, ServletException;
 
 
     /**

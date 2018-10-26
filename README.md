@@ -31,9 +31,19 @@ HTTP 1.1 的新特性
 
 Tomcat 4默认连接器的原理
 
+## 5.Servlet容器
+
+Context, Wrapper Container
+
+容器接到请求后，由Pipeline处理
+
+
+
 ## TODO
 
 TODO 找一个版本的tomcat,浏览源码
+
+看完后，要画一张请求处理的流程图
 
 
 

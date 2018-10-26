@@ -66,6 +66,7 @@ package org.apache.catalina;
 
 
 /**
+ * 实现这个接口的目的，就可以把Valve和一个Container关联，类似Spring里面的XxxAware
  * <p>Decoupling interface which specifies that an implementing class is
  * associated with at most one <strong>Container</strong> instance.</p>
  *
@@ -91,8 +92,8 @@ public interface Contained {
      * Set the <code>Container</code> with which this instance is associated.
      *
      * @param container The Container instance with which this instance is to
-     *  be associated, or <code>null</code> to disassociate this instance
-     *  from any Container
+     *                  be associated, or <code>null</code> to disassociate this instance
+     *                  from any Container
      */
     public void setContainer(Container container);
 

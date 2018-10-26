@@ -10,34 +10,34 @@ import org.apache.catalina.Valve;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.connector.http.HttpConnector;
 
+/**
+ * 启动一个只包含一个Wrapper实例的Web应用
+ * http://localhost:8080/ModernServlet
+ */
 public final class Bootstrap1 {
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-/* call by using http://localhost:8080/ModernServlet,
-   but could be invoked by any name */
+        HttpConnector connector = new HttpConnector();
 
-    HttpConnector connector = new HttpConnector();
+        Wrapper wrapper = new SimpleWrapper();
+        wrapper.setServletClass("ModernServlet");
+        wrapper.setLoader(new SimpleLoader());
 
-    Wrapper wrapper = new SimpleWrapper();
-    wrapper.setServletClass("ModernServlet");
-    wrapper.setLoader(new SimpleLoader());
+        Valve valve1 = new HeaderLoggerValve();
+        Valve valve2 = new ClientIPLoggerValve();
+        ((Pipeline) wrapper).addValve(valve1);
+        ((Pipeline) wrapper).addValve(valve2);
 
-    Valve valve1 = new HeaderLoggerValve();
-    Valve valve2 = new ClientIPLoggerValve();
-    ((Pipeline) wrapper).addValve(valve1);
-    ((Pipeline) wrapper).addValve(valve2);
+        connector.setContainer(wrapper);
 
-    connector.setContainer(wrapper);
+        try {
+            connector.initialize();
+            connector.start();
 
-    try {
-      connector.initialize();
-      connector.start();
-
-      // make the application wait until we press a key.
-      System.in.read();
+            // make the application wait until we press a key.
+            System.in.read();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 }
