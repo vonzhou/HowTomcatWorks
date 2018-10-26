@@ -78,8 +78,7 @@ import java.util.EventObject;
  * @version $Revision: 1.3 $ $Date: 2001/07/22 20:13:30 $
  */
 
-public final class LifecycleEvent
-    extends EventObject {
+public final class LifecycleEvent extends EventObject {
 
 
     // ----------------------------------------------------------- Constructors
@@ -89,7 +88,7 @@ public final class LifecycleEvent
      * Construct a new LifecycleEvent with the specified parameters.
      *
      * @param lifecycle Component on which this event occurred
-     * @param type Event type (required)
+     * @param type      Event type (required)
      */
     public LifecycleEvent(Lifecycle lifecycle, String type) {
 
@@ -102,8 +101,8 @@ public final class LifecycleEvent
      * Construct a new LifecycleEvent with the specified parameters.
      *
      * @param lifecycle Component on which this event occurred
-     * @param type Event type (required)
-     * @param data Event data (if any)
+     * @param type      Event type (required)
+     * @param data      Event data (if any)
      */
     public LifecycleEvent(Lifecycle lifecycle, String type, Object data) {
 

@@ -37,6 +37,12 @@ Context, Wrapper Container
 
 容器接到请求后，由Pipeline处理
 
+## 6.生命周期
+
+实现LifeCycle管理组件的生命周期
+
+优雅的启动，关闭关联的组件
+
 
 
 ## TODO
