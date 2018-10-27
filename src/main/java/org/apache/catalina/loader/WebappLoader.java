@@ -86,6 +86,7 @@ import javax.naming.Binding;
 import javax.naming.NameClassPair;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.DirContext;
+
 import org.apache.naming.resources.Resource;
 import org.apache.naming.resources.DirContextURLStreamHandler;
 import org.apache.naming.resources.DirContextURLStreamHandlerFactory;
@@ -120,8 +121,7 @@ import org.apache.catalina.util.StringManager;
  * @version $Revision: 1.30 $ $Date: 2002/09/20 21:20:44 $
  */
 
-public class WebappLoader
-    implements Lifecycle, Loader, PropertyChangeListener, Runnable {
+public class WebappLoader implements Lifecycle, Loader, PropertyChangeListener, Runnable {
 
 
     // ----------------------------------------------------------- Constructors
@@ -198,7 +198,7 @@ public class WebappLoader
      * The descriptive information about this Loader implementation.
      */
     private static final String info =
-        "org.apache.catalina.loader.WebappLoader/1.0";
+            "org.apache.catalina.loader.WebappLoader/1.0";
 
 
     /**
@@ -212,8 +212,7 @@ public class WebappLoader
      * This class should extend WebappClassLoader, otherwise, a different
      * loader implementation must be used.
      */
-    private String loaderClass =
-        "org.apache.catalina.loader.WebappClassLoader";
+    private String loaderClass = "org.apache.catalina.loader.WebappClassLoader";
 
 
     /**
@@ -238,7 +237,7 @@ public class WebappLoader
      * The string manager for this package.
      */
     protected static final StringManager sm =
-        StringManager.getManager(Constants.Package);
+            StringManager.getManager(Constants.Package);
 
 
     /**
@@ -294,8 +293,8 @@ public class WebappLoader
         int oldCheckInterval = this.checkInterval;
         this.checkInterval = checkInterval;
         support.firePropertyChange("checkInterval",
-                                   new Integer(oldCheckInterval),
-                                   new Integer(this.checkInterval));
+                new Integer(oldCheckInterval),
+                new Integer(this.checkInterval));
 
     }
 
@@ -338,7 +337,7 @@ public class WebappLoader
 
         // Register with the new Container (if any)
         if ((this.container != null) && (this.container instanceof Context)) {
-            setReloadable( ((Context) this.container).getReloadable() );
+            setReloadable(((Context) this.container).getReloadable());
             ((Context) this.container).addPropertyChangeListener(this);
         }
 
@@ -389,7 +388,7 @@ public class WebappLoader
         int oldDebug = this.debug;
         this.debug = debug;
         support.firePropertyChange("debug", new Integer(oldDebug),
-                                   new Integer(this.debug));
+                new Integer(this.debug));
 
     }
 
@@ -416,7 +415,7 @@ public class WebappLoader
         boolean oldDelegate = this.delegate;
         this.delegate = delegate;
         support.firePropertyChange("delegate", new Boolean(oldDelegate),
-                                   new Boolean(this.delegate));
+                new Boolean(this.delegate));
 
     }
 
@@ -476,8 +475,8 @@ public class WebappLoader
         boolean oldReloadable = this.reloadable;
         this.reloadable = reloadable;
         support.firePropertyChange("reloadable",
-                                   new Boolean(oldReloadable),
-                                   new Boolean(this.reloadable));
+                new Boolean(oldReloadable),
+                new Boolean(this.reloadable));
 
         // Start or stop our background thread if required
         if (!started)
@@ -622,14 +621,12 @@ public class WebappLoader
     /**
      * Start this component, initializing our associated class loader.
      *
-     * @exception org.apache.catalina.LifecycleException if a lifecycle error occurs
+     * @throws org.apache.catalina.LifecycleException if a lifecycle error occurs
      */
     public void start() throws LifecycleException {
-
         // Validate and update our current component state
         if (started)
-            throw new LifecycleException
-                (sm.getString("webappLoader.alreadyStarted"));
+            throw new LifecycleException(sm.getString("webappLoader.alreadyStarted"));
         if (debug >= 1)
             log(sm.getString("webappLoader.starting"));
         lifecycle.fireLifecycleEvent(START_EVENT, null);
@@ -639,8 +636,7 @@ public class WebappLoader
             return;
 
         // Register a stream handler factory for the JNDI protocol
-        URLStreamHandlerFactory streamHandlerFactory =
-            new DirContextURLStreamHandlerFactory();
+        URLStreamHandlerFactory streamHandlerFactory = new DirContextURLStreamHandlerFactory();
         try {
             URL.setURLStreamHandlerFactory(streamHandlerFactory);
         } catch (Throwable t) {
@@ -649,7 +645,6 @@ public class WebappLoader
 
         // Construct a class loader based on our current repositories list
         try {
-
             classLoader = createClassLoader();
             classLoader.setResources(container.getResources());
             classLoader.setDebug(this.debug);
@@ -669,8 +664,7 @@ public class WebappLoader
                 ((Lifecycle) classLoader).start();
 
             // Binding the Webapp class loader to the directory context
-            DirContextURLStreamHandler.bind
-                ((ClassLoader) classLoader, this.container.getResources());
+            DirContextURLStreamHandler.bind((ClassLoader) classLoader, this.container.getResources());
 
         } catch (Throwable t) {
             throw new LifecycleException("start: ", t);
@@ -695,14 +689,14 @@ public class WebappLoader
     /**
      * Stop this component, finalizing our associated class loader.
      *
-     * @exception org.apache.catalina.LifecycleException if a lifecycle error occurs
+     * @throws org.apache.catalina.LifecycleException if a lifecycle error occurs
      */
     public void stop() throws LifecycleException {
 
         // Validate and update our current component state
         if (!started)
             throw new LifecycleException
-                (sm.getString("webappLoader.notStarted"));
+                    (sm.getString("webappLoader.notStarted"));
         if (debug >= 1)
             log(sm.getString("webappLoader.stopping"));
         lifecycle.fireLifecycleEvent(STOP_EVENT, null);
@@ -715,7 +709,7 @@ public class WebappLoader
         // Remove context attributes as appropriate
         if (container instanceof Context) {
             ServletContext servletContext =
-                ((Context) container).getServletContext();
+                    ((Context) container).getServletContext();
             servletContext.removeAttribute(Globals.CLASS_PATH_ATTR);
         }
 
@@ -747,10 +741,10 @@ public class WebappLoader
         if (event.getPropertyName().equals("reloadable")) {
             try {
                 setReloadable
-                    ( ((Boolean) event.getNewValue()).booleanValue() );
+                        (((Boolean) event.getNewValue()).booleanValue());
             } catch (NumberFormatException e) {
                 log(sm.getString("webappLoader.reloadable",
-                                 event.getNewValue().toString()));
+                        event.getNewValue().toString()));
             }
         }
 
@@ -763,9 +757,7 @@ public class WebappLoader
     /**
      * Create associated classLoader.
      */
-    private WebappClassLoader createClassLoader()
-        throws Exception {
-
+    private WebappClassLoader createClassLoader() throws Exception {
         Class clazz = Class.forName(loaderClass);
         WebappClassLoader classLoader = null;
 
@@ -774,8 +766,8 @@ public class WebappLoader
             // this is on purpose (the exception will be caught and rethrown)
             classLoader = (WebappClassLoader) clazz.newInstance();
         } else {
-            Class[] argTypes = { ClassLoader.class };
-            Object[] args = { parentClassLoader };
+            Class[] argTypes = {ClassLoader.class};
+            Object[] args = {parentClassLoader};
             Constructor constr = clazz.getConstructor(argTypes);
             classLoader = (WebappClassLoader) constr.newInstance(args);
         }
@@ -797,13 +789,13 @@ public class WebappLoader
             logger = container.getLogger();
         if (logger != null)
             logger.log("WebappLoader[" + container.getName() + "]: "
-                       + message);
+                    + message);
         else {
             String containerName = null;
             if (container != null)
                 containerName = container.getName();
             System.out.println("WebappLoader[" + containerName
-                               + "]: " + message);
+                    + "]: " + message);
         }
 
     }
@@ -812,7 +804,7 @@ public class WebappLoader
     /**
      * Log a message on the Logger associated with our Container (if any)
      *
-     * @param message Message to be logged
+     * @param message   Message to be logged
      * @param throwable Associated exception
      */
     private void log(String message, Throwable throwable) {
@@ -822,13 +814,13 @@ public class WebappLoader
             logger = container.getLogger();
         if (logger != null) {
             logger.log("WebappLoader[" + container.getName() + "] "
-                       + message, throwable);
+                    + message, throwable);
         } else {
             String containerName = null;
             if (container != null)
                 containerName = container.getName();
             System.out.println("WebappLoader[" + containerName
-                               + "]: " + message);
+                    + "]: " + message);
             System.out.println("" + throwable);
             throwable.printStackTrace(System.out);
         }
@@ -859,19 +851,19 @@ public class WebappLoader
 
         // Tell the class loader the root of the context
         ServletContext servletContext =
-            ((Context) container).getServletContext();
+                ((Context) container).getServletContext();
 
         // Assigning permissions for the work directory
         File workDir =
-            (File) servletContext.getAttribute(Globals.WORK_DIR_ATTR);
+                (File) servletContext.getAttribute(Globals.WORK_DIR_ATTR);
         if (workDir != null) {
             try {
                 String workDirPath = workDir.getCanonicalPath();
                 classLoader.addPermission
-                    (new FilePermission(workDirPath, "read,write"));
+                        (new FilePermission(workDirPath, "read,write"));
                 classLoader.addPermission
-                    (new FilePermission(workDirPath + File.separator + "-",
-                                        "read,write,delete"));
+                        (new FilePermission(workDirPath + File.separator + "-",
+                                "read,write,delete"));
             } catch (IOException e) {
                 // Ignore
             }
@@ -886,8 +878,8 @@ public class WebappLoader
             if (contextRoot != null) {
                 try {
                     contextRoot =
-                        (new File(contextRoot)).getCanonicalPath()
-                        + File.separator;
+                            (new File(contextRoot)).getCanonicalPath()
+                                    + File.separator;
                     classLoader.addPermission(contextRoot);
                 } catch (IOException e) {
                     // Ignore
@@ -895,7 +887,7 @@ public class WebappLoader
             }
 
             URL classesURL =
-                servletContext.getResource("/WEB-INF/classes/");
+                    servletContext.getResource("/WEB-INF/classes/");
             if (classesURL != null)
                 classLoader.addPermission(classesURL);
 
@@ -932,11 +924,11 @@ public class WebappLoader
                     }
                     if (classesURL != null) {
                         File classesDir =
-                            new File(workDir, "WEB-INF/classes/");
+                                new File(workDir, "WEB-INF/classes/");
                         String path = null;
                         try {
                             path = classesDir.getCanonicalPath()
-                                + File.separator;
+                                    + File.separator;
                         } catch (IOException e) {
                         }
                         classLoader.addPermission(path);
@@ -960,13 +952,13 @@ public class WebappLoader
         if (!(container instanceof Context))
             return;
         ServletContext servletContext =
-            ((Context) container).getServletContext();
+                ((Context) container).getServletContext();
         if (servletContext == null)
             return;
 
         // Loading the work directory
         File workDir =
-            (File) servletContext.getAttribute(Globals.WORK_DIR_ATTR);
+                (File) servletContext.getAttribute(Globals.WORK_DIR_ATTR);
         if (workDir == null)
             return;
         log(sm.getString("webappLoader.deploy", workDir.getAbsolutePath()));
@@ -983,7 +975,7 @@ public class WebappLoader
             if (object instanceof DirContext) {
                 classes = (DirContext) object;
             }
-        } catch(NamingException e) {
+        } catch (NamingException e) {
             // Silent catch: it's valid that no /WEB-INF/classes collection
             // exists
         }
@@ -993,7 +985,7 @@ public class WebappLoader
             File classRepository = null;
 
             String absoluteClassesPath =
-                servletContext.getRealPath(classesPath);
+                    servletContext.getRealPath(classesPath);
 
             if (absoluteClassesPath != null) {
 
@@ -1008,7 +1000,7 @@ public class WebappLoader
             }
 
             log(sm.getString("webappLoader.classDeploy", classesPath,
-                             classRepository.getAbsolutePath()));
+                    classRepository.getAbsolutePath()));
 
 
             // Adding the repository to the class loader
@@ -1028,7 +1020,7 @@ public class WebappLoader
             Object object = resources.lookup(libPath);
             if (object instanceof DirContext)
                 libDir = (DirContext) object;
-        } catch(NamingException e) {
+        } catch (NamingException e) {
             // Silent catch: it's valid that no /WEB-INF/lib collection
             // exists
         }
@@ -1064,12 +1056,12 @@ public class WebappLoader
                     File destFile = new File(destDir, binding.getName());
 
                     log(sm.getString("webappLoader.jarDeploy", filename,
-                                     destFile.getAbsolutePath()));
+                            destFile.getAbsolutePath()));
 
                     Resource jarResource = (Resource) binding.getObject();
                     if (copyJars) {
                         if (!copy(jarResource.streamContent(),
-                                  new FileOutputStream(destFile)))
+                                new FileOutputStream(destFile)))
                             continue;
                     }
 
@@ -1099,7 +1091,7 @@ public class WebappLoader
         if (!(container instanceof Context))
             return;
         ServletContext servletContext =
-            ((Context) container).getServletContext();
+                ((Context) container).getServletContext();
         if (servletContext == null)
             return;
 
@@ -1113,7 +1105,7 @@ public class WebappLoader
             if (!(loader instanceof URLClassLoader))
                 break;
             URL repositories[] =
-                ((URLClassLoader) loader).getURLs();
+                    ((URLClassLoader) loader).getURLs();
             for (int i = 0; i < repositories.length; i++) {
                 String repository = repositories[i].toString();
                 if (repository.startsWith("file://"))
@@ -1122,7 +1114,7 @@ public class WebappLoader
                     repository = repository.substring(5);
                 else if (repository.startsWith("jndi:"))
                     repository =
-                        servletContext.getRealPath(repository.substring(5));
+                            servletContext.getRealPath(repository.substring(5));
                 else
                     continue;
                 if (repository == null)
@@ -1138,7 +1130,7 @@ public class WebappLoader
 
         // Store the assembled class path as a servlet context attribute
         servletContext.setAttribute(Globals.CLASS_PATH_ATTR,
-                                    classpath.toString());
+                classpath.toString());
 
     }
 
@@ -1153,7 +1145,7 @@ public class WebappLoader
             NamingEnumeration enum1 = srcDir.list("");
             while (enum1.hasMoreElements()) {
                 NameClassPair ncPair =
-                    (NameClassPair) enum1.nextElement();
+                        (NameClassPair) enum1.nextElement();
                 String name = ncPair.getName();
                 Object object = srcDir.lookup(name);
                 File currentFile = new File(destDir, name);
@@ -1227,8 +1219,8 @@ public class WebappLoader
      * Start the background thread that will periodically check for
      * session timeouts.
      *
-     * @exception IllegalStateException if we should not be starting
-     *  a background thread now
+     * @throws IllegalStateException if we should not be starting
+     *                               a background thread now
      */
     private void threadStart() {
 
@@ -1239,10 +1231,10 @@ public class WebappLoader
         // Validate our current state
         if (!reloadable)
             throw new IllegalStateException
-                (sm.getString("webappLoader.notReloadable"));
+                    (sm.getString("webappLoader.notReloadable"));
         if (!(container instanceof Context))
             throw new IllegalStateException
-                (sm.getString("webappLoader.notContext"));
+                    (sm.getString("webappLoader.notContext"));
 
         // Start the background thread
         if (debug >= 1)
@@ -1284,7 +1276,7 @@ public class WebappLoader
      * Validate that the required optional packages for this application
      * are actually present.
      *
-     * @exception org.apache.catalina.LifecycleException if a required package is not available
+     * @throws org.apache.catalina.LifecycleException if a required package is not available
      */
     private void validatePackages() throws LifecycleException {
 
@@ -1292,13 +1284,13 @@ public class WebappLoader
         if (classLoader instanceof WebappClassLoader) {
 
             Extension available[] =
-                ((WebappClassLoader) classLoader).findAvailable();
+                    ((WebappClassLoader) classLoader).findAvailable();
             Extension required[] =
-                ((WebappClassLoader) classLoader).findRequired();
+                    ((WebappClassLoader) classLoader).findRequired();
             if (debug >= 1)
                 log("Optional Packages:  available=" +
-                    available.length + ", required=" +
-                    required.length);
+                        available.length + ", required=" +
+                        required.length);
 
             for (int i = 0; i < required.length; i++) {
                 if (debug >= 1)
@@ -1312,7 +1304,7 @@ public class WebappLoader
                 }
                 if (!found)
                     throw new LifecycleException
-                        ("Missing optional package " + required[i]);
+                            ("Missing optional package " + required[i]);
             }
 
         }
@@ -1327,7 +1319,6 @@ public class WebappLoader
      * The background thread that checks for session timeouts and shutdown.
      */
     public void run() {
-
         if (debug >= 1)
             log("BACKGROUND THREAD Starting");
 

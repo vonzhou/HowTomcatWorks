@@ -47,7 +47,15 @@ Context, Wrapper Container
 
 FileLogger的实现
 
-## 8.
+## 8.加载器
+
+Tomcat为何要实现自己的加载器
+
+Loader, Reloader接口
+
+WepappLoader, WepappClassLoader
+
+
 
 
 
@@ -56,6 +64,8 @@ FileLogger的实现
 TODO 找一个版本的tomcat,浏览源码
 
 看完后，要画一张请求处理的流程图
+
+梳理组件关联UML图
 
 
 
