@@ -86,8 +86,7 @@ import org.apache.catalina.util.StringManager;
  * @version $Revision: 1.8 $ $Date: 2002/03/14 20:58:24 $
  */
 
-public final class StandardContextMapper
-    implements Mapper {
+public final class StandardContextMapper implements Mapper {
 
 
     // ----------------------------------------------------- Instance Variables

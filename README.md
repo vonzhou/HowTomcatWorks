@@ -62,6 +62,11 @@ StandardWrapper工作原理,loadServlet过程
 
 ## 12.StandardContext
 
+start做了哪些工作
+
+Tomcat 4中组件使用各自的线程来处理一些定时任务,Tomcat 5中为了节省资源所有后台任务共享一个线程
+
+
 ## 13.Host和Engine
 
 

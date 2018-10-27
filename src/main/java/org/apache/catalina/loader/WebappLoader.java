@@ -465,12 +465,12 @@ public class WebappLoader implements Lifecycle, Loader, PropertyChangeListener, 
 
 
     /**
+     * 如果reloadable属性从false变为true,则开启一个线程不断检查WEB-INF目录中的类和jar文件时间戳
      * Set the reloadable flag for this Loader.
      *
      * @param reloadable The new reloadable flag
      */
     public void setReloadable(boolean reloadable) {
-
         // Process this property change
         boolean oldReloadable = this.reloadable;
         this.reloadable = reloadable;
@@ -1223,7 +1223,6 @@ public class WebappLoader implements Lifecycle, Loader, PropertyChangeListener, 
      *                               a background thread now
      */
     private void threadStart() {
-
         // Has the background thread already been started?
         if (thread != null)
             return;

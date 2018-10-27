@@ -303,8 +303,7 @@ public class StandardContext extends ContainerBase implements Context {
     /**
      * The Java class name of the default Mapper class for this Container.
      */
-    private String mapperClass =
-            "org.apache.catalina.core.StandardContextMapper";
+    private String mapperClass = "org.apache.catalina.core.StandardContextMapper";
 
 
     /**
@@ -2344,6 +2343,7 @@ public class StandardContext extends ContainerBase implements Context {
     public void invoke(Request request, Response response)
             throws IOException, ServletException {
 
+        // 在重载,则等待
         // Wait if we are reloading
         while (getPaused()) {
             try {
@@ -3331,8 +3331,7 @@ public class StandardContext extends ContainerBase implements Context {
      */
     public synchronized void start() throws LifecycleException {
         if (started)
-            throw new LifecycleException
-                    (sm.getString("containerBase.alreadyStarted", logName()));
+            throw new LifecycleException(sm.getString("containerBase.alreadyStarted", logName()));
 
         if (debug >= 1)
             log("Starting");
@@ -3477,8 +3476,7 @@ public class StandardContext extends ContainerBase implements Context {
 
         // We put the resources into the servlet context
         if (ok)
-            getServletContext().setAttribute
-                    (Globals.RESOURCES_ATTR, getResources());
+            getServletContext().setAttribute(Globals.RESOURCES_ATTR, getResources());
 
         // Binding thread
         oldCCL = bindThread();
