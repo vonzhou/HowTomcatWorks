@@ -310,7 +310,7 @@ public interface Session {
      * Bind an object to a specified name in the internal notes associated
      * with this session, replacing any existing binding for this name.
      *
-     * @param name Name to which the object should be bound
+     * @param name  Name to which the object should be bound
      * @param value Object to be bound to the specified name
      */
     public void setNote(String name, Object value);

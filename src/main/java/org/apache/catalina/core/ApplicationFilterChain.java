@@ -77,6 +77,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.catalina.InstanceEvent;
 import org.apache.catalina.util.InstanceSupport;
 import org.apache.catalina.util.StringManager;
@@ -136,7 +137,7 @@ final class ApplicationFilterChain implements FilterChain {
      * The string manager for our package.
      */
     private static final StringManager sm =
-      StringManager.getManager(Constants.Package);
+            StringManager.getManager(Constants.Package);
 
 
     /**
@@ -154,29 +155,27 @@ final class ApplicationFilterChain implements FilterChain {
      * and response.  If there are no more filters in this chain, invoke
      * the <code>service()</code> method of the servlet itself.
      *
-     * @param request The servlet request we are processing
+     * @param request  The servlet request we are processing
      * @param response The servlet response we are creating
-     *
-     * @exception java.io.IOException if an input/output error occurs
-     * @exception javax.servlet.ServletException if a servlet exception occurs
+     * @throws java.io.IOException            if an input/output error occurs
+     * @throws javax.servlet.ServletException if a servlet exception occurs
      */
     public void doFilter(ServletRequest request, ServletResponse response)
-        throws IOException, ServletException {
+            throws IOException, ServletException {
 
-        if( System.getSecurityManager() != null ) {
+        if (System.getSecurityManager() != null) {
             final ServletRequest req = request;
             final ServletResponse res = response;
             try {
                 java.security.AccessController.doPrivileged(
-                    new java.security.PrivilegedExceptionAction()
-                    {
-                        public Object run() throws ServletException, IOException {
-                            internalDoFilter(req,res);
-                            return null;
+                        new java.security.PrivilegedExceptionAction() {
+                            public Object run() throws ServletException, IOException {
+                                internalDoFilter(req, res);
+                                return null;
+                            }
                         }
-                    }
                 );
-            } catch( PrivilegedActionException pe) {
+            } catch (PrivilegedActionException pe) {
                 Exception e = pe.getException();
                 if (e instanceof ServletException)
                     throw (ServletException) e;
@@ -188,12 +187,12 @@ final class ApplicationFilterChain implements FilterChain {
                     throw new ServletException(e.getMessage(), e);
             }
         } else {
-            internalDoFilter(request,response);
+            internalDoFilter(request, response);
         }
     }
 
     private void internalDoFilter(ServletRequest request, ServletResponse response)
-        throws IOException, ServletException {
+            throws IOException, ServletException {
 
         // Construct an iterator the first time this method is called
         if (this.iterator == null)
@@ -202,36 +201,36 @@ final class ApplicationFilterChain implements FilterChain {
         // Call the next filter if there is one
         if (this.iterator.hasNext()) {
             ApplicationFilterConfig filterConfig =
-              (ApplicationFilterConfig) iterator.next();
+                    (ApplicationFilterConfig) iterator.next();
             Filter filter = null;
             try {
                 filter = filterConfig.getFilter();
                 support.fireInstanceEvent(InstanceEvent.BEFORE_FILTER_EVENT,
-                                          filter, request, response);
+                        filter, request, response);
                 filter.doFilter(request, response, this);
                 support.fireInstanceEvent(InstanceEvent.AFTER_FILTER_EVENT,
-                                          filter, request, response);
+                        filter, request, response);
             } catch (IOException e) {
                 if (filter != null)
                     support.fireInstanceEvent(InstanceEvent.AFTER_FILTER_EVENT,
-                                              filter, request, response, e);
+                            filter, request, response, e);
                 throw e;
             } catch (ServletException e) {
                 if (filter != null)
                     support.fireInstanceEvent(InstanceEvent.AFTER_FILTER_EVENT,
-                                              filter, request, response, e);
+                            filter, request, response, e);
                 throw e;
             } catch (RuntimeException e) {
                 if (filter != null)
                     support.fireInstanceEvent(InstanceEvent.AFTER_FILTER_EVENT,
-                                              filter, request, response, e);
+                            filter, request, response, e);
                 throw e;
             } catch (Throwable e) {
                 if (filter != null)
                     support.fireInstanceEvent(InstanceEvent.AFTER_FILTER_EVENT,
-                                              filter, request, response, e);
+                            filter, request, response, e);
                 throw new ServletException
-                  (sm.getString("filterChain.filter"), e);
+                        (sm.getString("filterChain.filter"), e);
             }
             return;
         }
@@ -239,40 +238,39 @@ final class ApplicationFilterChain implements FilterChain {
         // We fell off the end of the chain -- call the servlet instance
         try {
             support.fireInstanceEvent(InstanceEvent.BEFORE_SERVICE_EVENT,
-                                      servlet, request, response);
+                    servlet, request, response);
             if ((request instanceof HttpServletRequest) &&
-                (response instanceof HttpServletResponse)) {
+                    (response instanceof HttpServletResponse)) {
                 servlet.service((HttpServletRequest) request,
-                                (HttpServletResponse) response);
+                        (HttpServletResponse) response);
             } else {
                 servlet.service(request, response);
             }
             support.fireInstanceEvent(InstanceEvent.AFTER_SERVICE_EVENT,
-                                      servlet, request, response);
+                    servlet, request, response);
         } catch (IOException e) {
             support.fireInstanceEvent(InstanceEvent.AFTER_SERVICE_EVENT,
-                                      servlet, request, response, e);
+                    servlet, request, response, e);
             throw e;
         } catch (ServletException e) {
             support.fireInstanceEvent(InstanceEvent.AFTER_SERVICE_EVENT,
-                                      servlet, request, response, e);
+                    servlet, request, response, e);
             throw e;
         } catch (RuntimeException e) {
             support.fireInstanceEvent(InstanceEvent.AFTER_SERVICE_EVENT,
-                                      servlet, request, response, e);
+                    servlet, request, response, e);
             throw e;
         } catch (Throwable e) {
             support.fireInstanceEvent(InstanceEvent.AFTER_SERVICE_EVENT,
-                                      servlet, request, response, e);
+                    servlet, request, response, e);
             throw new ServletException
-              (sm.getString("filterChain.servlet"), e);
+                    (sm.getString("filterChain.servlet"), e);
         }
 
     }
 
 
     // -------------------------------------------------------- Package Methods
-
 
 
     /**

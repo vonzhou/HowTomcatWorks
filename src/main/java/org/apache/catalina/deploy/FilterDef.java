@@ -188,7 +188,7 @@ public final class FilterDef {
      * Add an initialization parameter to the set of parameters associated
      * with this filter.
      *
-     * @param name The initialization parameter name
+     * @param name  The initialization parameter name
      * @param value The initialization parameter value
      */
     public void addInitParameter(String name, String value) {

@@ -72,6 +72,7 @@ import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+
 import org.apache.catalina.Context;
 import org.apache.catalina.deploy.FilterDef;
 import org.apache.catalina.util.Enumerator;
@@ -96,23 +97,22 @@ final class ApplicationFilterConfig implements FilterConfig {
      * Construct a new ApplicationFilterConfig for the specified filter
      * definition.
      *
-     * @param context The context with which we are associated
+     * @param context   The context with which we are associated
      * @param filterDef Filter definition for which a FilterConfig is to be
-     *  constructed
-     *
-     * @exception ClassCastException if the specified class does not implement
-     *  the <code>javax.servlet.Filter</code> interface
-     * @exception ClassNotFoundException if the filter class cannot be found
-     * @exception IllegalAccessException if the filter class cannot be
-     *  publicly instantiated
-     * @exception InstantiationException if an exception occurs while
-     *  instantiating the filter object
-     * @exception javax.servlet.ServletException if thrown by the filter's init() method
+     *                  constructed
+     * @throws ClassCastException             if the specified class does not implement
+     *                                        the <code>javax.servlet.Filter</code> interface
+     * @throws ClassNotFoundException         if the filter class cannot be found
+     * @throws IllegalAccessException         if the filter class cannot be
+     *                                        publicly instantiated
+     * @throws InstantiationException         if an exception occurs while
+     *                                        instantiating the filter object
+     * @throws javax.servlet.ServletException if thrown by the filter's init() method
      */
     public ApplicationFilterConfig(Context context, FilterDef filterDef)
-        throws ClassCastException, ClassNotFoundException,
-               IllegalAccessException, InstantiationException,
-               ServletException {
+            throws ClassCastException, ClassNotFoundException,
+            IllegalAccessException, InstantiationException,
+            ServletException {
 
         super();
         this.context = context;
@@ -220,17 +220,17 @@ final class ApplicationFilterConfig implements FilterConfig {
     /**
      * Return the application Filter we are configured for.
      *
-     * @exception ClassCastException if the specified class does not implement
-     *  the <code>javax.servlet.Filter</code> interface
-     * @exception ClassNotFoundException if the filter class cannot be found
-     * @exception IllegalAccessException if the filter class cannot be
-     *  publicly instantiated
-     * @exception InstantiationException if an exception occurs while
-     *  instantiating the filter object
-     * @exception javax.servlet.ServletException if thrown by the filter's init() method
+     * @throws ClassCastException             if the specified class does not implement
+     *                                        the <code>javax.servlet.Filter</code> interface
+     * @throws ClassNotFoundException         if the filter class cannot be found
+     * @throws IllegalAccessException         if the filter class cannot be
+     *                                        publicly instantiated
+     * @throws InstantiationException         if an exception occurs while
+     *                                        instantiating the filter object
+     * @throws javax.servlet.ServletException if thrown by the filter's init() method
      */
     Filter getFilter() throws ClassCastException, ClassNotFoundException,
-        IllegalAccessException, InstantiationException, ServletException {
+            IllegalAccessException, InstantiationException, ServletException {
 
         // Return the existing filter instance, if any
         if (this.filter != null)
@@ -245,7 +245,7 @@ final class ApplicationFilterConfig implements FilterConfig {
             classLoader = context.getLoader().getClassLoader();
 
         ClassLoader oldCtxClassLoader =
-            Thread.currentThread().getContextClassLoader();
+                Thread.currentThread().getContextClassLoader();
 
         // Instantiate a new instance of this filter and return it
         Class clazz = classLoader.loadClass(filterClass);
@@ -276,7 +276,7 @@ final class ApplicationFilterConfig implements FilterConfig {
             filter.destroy();
         this.filter = null;
 
-     }
+    }
 
 
     /**
@@ -284,20 +284,19 @@ final class ApplicationFilterConfig implements FilterConfig {
      * effect of instantiating an instance of the corresponding filter class.
      *
      * @param filterDef The new filter definition
-     *
-     * @exception ClassCastException if the specified class does not implement
-     *  the <code>javax.servlet.Filter</code> interface
-     * @exception ClassNotFoundException if the filter class cannot be found
-     * @exception IllegalAccessException if the filter class cannot be
-     *  publicly instantiated
-     * @exception InstantiationException if an exception occurs while
-     *  instantiating the filter object
-     * @exception javax.servlet.ServletException if thrown by the filter's init() method
+     * @throws ClassCastException             if the specified class does not implement
+     *                                        the <code>javax.servlet.Filter</code> interface
+     * @throws ClassNotFoundException         if the filter class cannot be found
+     * @throws IllegalAccessException         if the filter class cannot be
+     *                                        publicly instantiated
+     * @throws InstantiationException         if an exception occurs while
+     *                                        instantiating the filter object
+     * @throws javax.servlet.ServletException if thrown by the filter's init() method
      */
     void setFilterDef(FilterDef filterDef)
-        throws ClassCastException, ClassNotFoundException,
-               IllegalAccessException, InstantiationException,
-               ServletException {
+            throws ClassCastException, ClassNotFoundException,
+            IllegalAccessException, InstantiationException,
+            ServletException {
 
         this.filterDef = filterDef;
         if (filterDef == null) {
