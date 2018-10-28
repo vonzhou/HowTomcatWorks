@@ -75,6 +75,15 @@ Tomcat 4中组件使用各自的线程来处理一些定时任务,Tomcat 5中为
 
 Server优雅的方式启动,关闭整个catalina
 
+## 15.Digester库
+
+
+## 16.ShutdownHook
+
+没说和Tomcat有啥关系
+
+
+
 ## TODO
 
 TODO 找一个版本的tomcat,浏览源码
