@@ -69,6 +69,11 @@ Tomcat 4中组件使用各自的线程来处理一些定时任务,Tomcat 5中为
 
 ## 13.Host和Engine
 
+使用Host,Engine容器
+
+## 14.Server和Service组件
+
+Server优雅的方式启动,关闭整个catalina
 
 ## TODO
 

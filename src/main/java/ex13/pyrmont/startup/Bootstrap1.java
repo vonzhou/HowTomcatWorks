@@ -15,10 +15,12 @@ import org.apache.catalina.core.StandardHost;
 import org.apache.catalina.core.StandardWrapper;
 import org.apache.catalina.loader.WebappLoader;
 
-
+/**
+ * http://localhost:8080/app1/Primitive
+ * http://localhost:8080/app1/Modern
+ */
 public final class Bootstrap1 {
   public static void main(String[] args) {
-    //invoke: http://localhost:8080/app1/Primitive or http://localhost:8080/app1/Modern
     System.setProperty("catalina.base", System.getProperty("user.dir"));
     Connector connector = new HttpConnector();
 
@@ -40,6 +42,7 @@ public final class Bootstrap1 {
     LifecycleListener listener = new SimpleContextConfig();
     ((Lifecycle) context).addLifecycleListener(listener);
 
+    // 使用Host作为顶级容器
     Host host = new StandardHost();
     host.addChild(context);
     host.setName("localhost");

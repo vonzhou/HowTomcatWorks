@@ -87,9 +87,7 @@ import org.apache.catalina.valves.ErrorDispatcherValve;
  * @version $Revision: 1.29 $ $Date: 2002/06/09 02:19:42 $
  */
 
-public class StandardHost
-    extends ContainerBase
-    implements Deployer, Host {
+public class StandardHost extends ContainerBase implements Deployer, Host {
 
 
     // ----------------------------------------------------------- Constructors

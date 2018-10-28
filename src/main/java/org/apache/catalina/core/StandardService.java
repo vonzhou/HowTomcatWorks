@@ -67,6 +67,7 @@ package org.apache.catalina.core;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+
 import org.apache.catalina.Connector;
 import org.apache.catalina.Container;
 import org.apache.catalina.Engine;
@@ -88,8 +89,7 @@ import org.apache.catalina.util.StringManager;
  * @version $Revision: 1.11 $ $Date: 2002/06/09 02:19:42 $
  */
 
-public final class StandardService
-    implements Lifecycle, Service {
+public final class StandardService implements Lifecycle, Service {
 
 
     // ----------------------------------------------------- Instance Variables
@@ -117,7 +117,7 @@ public final class StandardService
      * Descriptive information about this component implementation.
      */
     private static final String info =
-        "org.apache.catalina.core.StandardService/1.0";
+            "org.apache.catalina.core.StandardService/1.0";
 
 
     /**
@@ -142,7 +142,7 @@ public final class StandardService
      * The string manager for this package.
      */
     private static final StringManager sm =
-        StringManager.getManager(Constants.Package);
+            StringManager.getManager(Constants.Package);
 
     /**
      * The <code>Server</code> that owns this Service, if any.
@@ -190,7 +190,7 @@ public final class StandardService
         if ((this.container != null) && (this.container instanceof Engine))
             ((Engine) this.container).setService(this);
         if (started && (this.container != null) &&
-            (this.container instanceof Lifecycle)) {
+                (this.container instanceof Lifecycle)) {
             try {
                 ((Lifecycle) this.container).start();
             } catch (LifecycleException e) {
@@ -202,7 +202,7 @@ public final class StandardService
                 connectors[i].setContainer(this.container);
         }
         if (started && (oldContainer != null) &&
-            (oldContainer instanceof Lifecycle)) {
+                (oldContainer instanceof Lifecycle)) {
             try {
                 ((Lifecycle) oldContainer).stop();
             } catch (LifecycleException e) {
@@ -442,7 +442,7 @@ public final class StandardService
 
 
     /**
-     * Get the lifecycle listeners associated with this lifecycle. If this 
+     * Get the lifecycle listeners associated with this lifecycle. If this
      * Lifecycle has no listeners registered, a zero-length array is returned.
      */
     public LifecycleListener[] findLifecycleListeners() {
@@ -470,22 +470,22 @@ public final class StandardService
      * methods of this component are utilized.  It should also send a
      * LifecycleEvent of type START_EVENT to any registered listeners.
      *
-     * @exception org.apache.catalina.LifecycleException if this component detects a fatal error
-     *  that prevents this component from being used
+     * @throws org.apache.catalina.LifecycleException if this component detects a fatal error
+     *                                                that prevents this component from being used
      */
     public void start() throws LifecycleException {
 
         // Validate and update our current component state
         if (started) {
             throw new LifecycleException
-                (sm.getString("standardService.start.started"));
+                    (sm.getString("standardService.start.started"));
         }
 
         // Notify our interested LifecycleListeners
         lifecycle.fireLifecycleEvent(BEFORE_START_EVENT, null);
 
         System.out.println
-            (sm.getString("standardService.start.name", this.name));
+                (sm.getString("standardService.start.name", this.name));
         lifecycle.fireLifecycleEvent(START_EVENT, null);
         started = true;
 
@@ -518,15 +518,15 @@ public final class StandardService
      * instance of this component.  It should also send a LifecycleEvent
      * of type STOP_EVENT to any registered listeners.
      *
-     * @exception org.apache.catalina.LifecycleException if this component detects a fatal error
-     *  that needs to be reported
+     * @throws org.apache.catalina.LifecycleException if this component detects a fatal error
+     *                                                that needs to be reported
      */
     public void stop() throws LifecycleException {
 
         // Validate and update our current component state
         if (!started) {
             throw new LifecycleException
-                (sm.getString("standardService.stop.notStarted"));
+                    (sm.getString("standardService.stop.notStarted"));
         }
 
         // Notify our interested LifecycleListeners
@@ -535,7 +535,7 @@ public final class StandardService
         lifecycle.fireLifecycleEvent(STOP_EVENT, null);
 
         System.out.println
-            (sm.getString("standardService.stop.name", this.name));
+                (sm.getString("standardService.stop.name", this.name));
         started = false;
 
         // Stop our defined Connectors first
@@ -566,17 +566,17 @@ public final class StandardService
      * to bind to restricted ports under Unix operating environments.
      */
     public void initialize()
-    throws LifecycleException {
+            throws LifecycleException {
         if (initialized)
-            throw new LifecycleException (
-                sm.getString("standardService.initialize.initialized"));
+            throw new LifecycleException(
+                    sm.getString("standardService.initialize.initialized"));
         initialized = true;
 
         // Initialize our defined Connectors
         synchronized (connectors) {
-                for (int i = 0; i < connectors.length; i++) {
-                    connectors[i].initialize();
-                }
+            for (int i = 0; i < connectors.length; i++) {
+                connectors[i].initialize();
+            }
         }
     }
 

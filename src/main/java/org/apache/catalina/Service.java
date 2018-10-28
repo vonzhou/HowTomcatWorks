@@ -136,7 +136,7 @@ public interface Service {
      */
     public void setServer(Server server);
 
-    
+
     // --------------------------------------------------------- Public Methods
 
 
@@ -168,9 +168,9 @@ public interface Service {
      * Invoke a pre-startup initialization. This is used to allow connectors
      * to bind to restricted ports under Unix operating environments.
      *
-     * @exception org.apache.catalina.LifecycleException If this server was already initialized.
+     * @throws org.apache.catalina.LifecycleException If this server was already initialized.
      */
     public void initialize()
-    throws LifecycleException;
+            throws LifecycleException;
 
 }
