@@ -1,5 +1,7 @@
 # How Tomcat Works 
 
+![](./flow.png)
+
 ## 1.一个简答的Web服务器
 
 问题：请求HttpServer没有看到响应的内容
