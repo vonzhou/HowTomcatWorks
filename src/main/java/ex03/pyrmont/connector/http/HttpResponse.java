@@ -308,6 +308,12 @@ public class HttpResponse implements HttpServletResponse {
       /* request.getUri has been replaced by request.getRequestURI */
             File file = new File(Constants.WEB_ROOT, request.getRequestURI());
             fis = new FileInputStream(file);
+            PrintWriter printWriter = getWriter();
+            // 补充http响应头
+            printWriter.println("HTTP/1.1 200 OK");
+            printWriter.println("Content-Type:text/html;charset=utf-8");
+            printWriter.println("Content-length: " + file.length());
+            printWriter.println();
       /*
          HTTP Response = Status-Line
            *(( general-header | response-header | entity-header ) CRLF)
@@ -320,6 +326,7 @@ public class HttpResponse implements HttpServletResponse {
                 output.write(bytes, 0, ch);
                 ch = fis.read(bytes, 0, BUFFER_SIZE);
             }
+            printWriter.close();
         } catch (FileNotFoundException e) {
             String errorMessage = "HTTP/1.1 404 File Not Found\r\n" +
                     "Content-Type: text/html\r\n" +
@@ -468,7 +475,7 @@ public class HttpResponse implements HttpServletResponse {
 
     public PrintWriter getWriter() throws IOException {
         ResponseStream newStream = new ResponseStream(this);
-        newStream.setCommit(false);
+        newStream.setCommit(true);
         OutputStreamWriter osr =
                 new OutputStreamWriter(newStream, getCharacterEncoding());
         writer = new ResponseWriter(osr);
